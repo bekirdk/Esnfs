@@ -8,8 +8,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _notificationSwitch = false;
-  bool _emailSwitch = false;
+  bool _notificationSwitch = true;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           backgroundColor: theme.primaryColor,
           title: const Text(
-            'Settings',
+            'Ayarlar',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -43,11 +42,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildSectionHeader('General'),
+              _buildSectionHeader('Genel Ayarlar'),
               _buildSettingsContainer(
                 children: [
+                  _buildNavigationRow(title: 'Dükkan Bilgileri', value: 'Ayarlanmadı'),
+                  const Divider(height: 1, indent: 16, endIndent: 16),
+                  _buildNavigationRow(title: 'Tema Modu', value: 'Açık'),
+                  const Divider(height: 1, indent: 16, endIndent: 16),
+                   _buildNavigationRow(title: 'Para Birimi', value: '₺ (TL)'),
+                  const Divider(height: 1, indent: 16, endIndent: 16),
                   _buildToggleRow(
-                    title: 'Notification',
+                    title: 'Satış Bildirimleri',
                     value: _notificationSwitch,
                     onChanged: (value) {
                       setState(() {
@@ -55,45 +60,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       });
                     },
                   ),
-                  const Divider(height: 1, indent: 16, endIndent: 16),
-                  _buildNavigationRow(title: 'Theme Mode', value: 'Light'),
-                  const Divider(height: 1, indent: 16, endIndent: 16),
-                  _buildToggleRow(
-                    title: 'Email',
-                    value: _emailSwitch,
-                    onChanged: (value) {
-                      setState(() {
-                        _emailSwitch = value;
-                      });
-                    },
-                  ),
                 ],
               ),
               const SizedBox(height: 32),
-              _buildSectionHeader('Support'),
+              _buildSectionHeader('Destek'),
               _buildSettingsContainer(
                 children: [
-                  _buildNavigationRow(title: 'Terms of Services'),
+                  _buildNavigationRow(title: 'Yardım ve SSS'),
                   const Divider(height: 1, indent: 16, endIndent: 16),
-                  _buildNavigationRow(title: 'Data Policy'),
-                  const Divider(height: 1, indent: 16, endIndent: 16),
-                  _buildNavigationRow(title: 'About'),
-                  const Divider(height: 1, indent: 16, endIndent: 16),
-                  _buildNavigationRow(title: 'Help/FAQ'),
-                   const Divider(height: 1, indent: 16, endIndent: 16),
-                  _buildNavigationRow(title: 'Contact Us'),
+                  _buildNavigationRow(title: 'Hakkında'),
                 ],
               ),
+               const SizedBox(height: 32),
+              _buildSectionHeader('Hesap Yönetimi'),
             ],
           ),
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 32.0),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: theme.primaryColor,
-            foregroundColor: Colors.white,
+            backgroundColor: theme.primaryColor.withOpacity(0.1),
+            foregroundColor: theme.primaryColor,
+            elevation: 0,
             minimumSize: const Size(double.infinity, 56),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.0),
@@ -103,7 +93,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             // TODO: Sign Out logic
           },
           child: const Text(
-            'Sign Out',
+            'Çıkış Yap',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
@@ -114,24 +104,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Bölüm başlıkları için yardımcı metot
   Widget _buildSectionHeader(String title) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0, left: 8.0),
+      padding: const EdgeInsets.only(bottom: 12.0, left: 8.0),
       child: Text(
-        title,
-        style: const TextStyle(
-          color: Colors.red,
+        title.toUpperCase(),
+        style: TextStyle(
+          color: Colors.grey.shade600,
           fontSize: 14,
           fontWeight: FontWeight.bold,
+          letterSpacing: 1.1,
         ),
       ),
     );
   }
 
-  // Ayar satırlarını tutan ana konteyner için yardımcı metot
   Widget _buildSettingsContainer({required List<Widget> children}) {
-     return Container(
+    return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.0),
@@ -142,7 +131,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Açma/kapama anahtarlı ayar satırları için yardımcı metot
   Widget _buildToggleRow({
     required String title,
     required bool value,
@@ -150,22 +138,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-      title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+      title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
       trailing: Switch(
         value: value,
         onChanged: onChanged,
-        activeColor: Colors.green, // Açıkken yeşil
-        inactiveThumbColor: Colors.red, // Kapalıyken topuzu kırmızı
-        inactiveTrackColor: Colors.red.withOpacity(0.3), // Kapalıyken yolu kırmızımsı
+        activeColor: Theme.of(context).primaryColor, // Açıkken ana tema rengimiz (mavi)
       ),
     );
   }
 
-  // Ok ikonlu, tıklanabilir ayar satırları için yardımcı metot
   Widget _buildNavigationRow({required String title, String? value}) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-      title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+      title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

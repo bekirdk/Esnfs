@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 class MainAppHeader extends StatelessWidget {
-  final VoidCallback? onMenuPressed;
   final VoidCallback? onAddPressed;
 
-  const MainAppHeader({super.key, this.onMenuPressed, this.onAddPressed});
+  const MainAppHeader({super.key, this.onAddPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +14,17 @@ class MainAppHeader extends StatelessWidget {
         children: [
           IconButton(
             icon: const Icon(Icons.apps_rounded),
-            onPressed: onMenuPressed,
+            tooltip: 'Menüyü Aç',
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
           ),
           Row(
             children: [
               if (onAddPressed != null)
                 IconButton(
                   icon: const Icon(Icons.add_circle_outline),
+                  tooltip: 'Yeni Ekle',
                   onPressed: onAddPressed,
                 ),
               IconButton(
