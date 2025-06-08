@@ -1,0 +1,37 @@
+name: esnaf_pos
+description: "Esnaflar için geliştirilmiş basit POS uygulaması."
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.4 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.6
+  firebase_core: ^3.1.0
+  cloud_firestore: ^5.0.1
+  firebase_auth: ^5.1.0
+  mobile_scanner: ^5.1.0
+  pdf: ^3.11.0
+  printing: ^5.12.0
+  animations: ^2.0.11
+  intl: ^0.19.0
+  
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  fonts:
+    - family: Helvetica
+      fonts:
+        - asset: fonts/Helvetica-Bold.ttf
+          weight: 700

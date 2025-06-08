@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1046723306402",
+    "project_id": "esnafsepetim",
+    "storage_bucket": "esnafsepetim.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046723306402:android:5f0eb21bb88b2c4d03c8fb",
+        "android_client_info": {
+          "package_name": "com.example.esnaf_pos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpYPAF4ubDVG9_WbCcEsNIMTjfh3oXEpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
